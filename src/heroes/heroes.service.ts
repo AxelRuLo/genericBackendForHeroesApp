@@ -67,6 +67,19 @@ export class HeroesService {
     return hero;
   }
 
+  getHeroSummary() {
+    const heroes = this.heroes;
+    const totalHeroes = heroes.length;
+    const strongestHero = heroes.reduce((max, hero) =>
+      hero.strength > max.strength ? hero : max,
+    );
+    const smartestHero = heroes.reduce((max, hero) =>
+      hero.intelligence > max.intelligence ? hero : max,
+    );
+
+    return { totalHeroes, strongestHero, smartestHero };
+  }
+
   findByAdvancedSearch(advancedSearchDto: AdvancedSearchDto) {
     const { name, team, category, universe, status, strength } =
       advancedSearchDto;

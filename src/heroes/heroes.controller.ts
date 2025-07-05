@@ -29,6 +29,11 @@ export class HeroesController {
     return this.heroesService.findAll(paginationDto);
   }
 
+  @Get('/summary')
+  getDashboardData() {
+    return this.heroesService.getHeroSummary();
+  }
+
   @Get('/search')
   findByAdvancedSearch(
     @Query() advancedSearchDto: AdvancedSearchDto = {},
