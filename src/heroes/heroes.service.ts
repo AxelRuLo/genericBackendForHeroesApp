@@ -77,7 +77,29 @@ export class HeroesService {
       hero.intelligence > max.intelligence ? hero : max,
     );
 
-    return { totalHeroes, strongestHero, smartestHero };
+    const heroCount = heroes.reduce((acc, hero) => {
+      if (hero.category === 'Hero') {
+        return acc + 1;
+      }
+
+      return acc;
+    }, 0);
+
+    const villainCount = heroes.reduce((acc, hero) => {
+      if (hero.category === 'Villain') {
+        return acc + 1;
+      }
+
+      return acc;
+    }, 0);
+
+    return {
+      totalHeroes,
+      strongestHero,
+      smartestHero,
+      heroCount,
+      villainCount,
+    };
   }
 
   findByAdvancedSearch(advancedSearchDto: AdvancedSearchDto) {
