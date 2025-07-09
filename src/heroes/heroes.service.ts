@@ -29,19 +29,21 @@ export class HeroesService {
   findAll(paginationDto: PaginationDto) {
     const { limit = 6, offset = 0, category = 'all' } = paginationDto;
 
-    let heroes = this.heroes;
+    let heroes = [...this.heroes];
+    let heroCount = heroes.length;
 
     if (category !== 'all') {
       heroes = heroes.filter(
         (hero) => hero.category.toLowerCase() === category.toLowerCase(),
       );
+      heroCount = heroes.length;
     }
 
     heroes = heroes.slice(offset, offset + limit);
 
     return {
-      total: this.heroes.length,
-      pages: Math.ceil(this.heroes.length / limit),
+      total: heroCount,
+      pages: Math.ceil(heroCount / limit),
       heroes,
     };
   }
